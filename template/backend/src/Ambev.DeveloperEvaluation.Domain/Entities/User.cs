@@ -6,7 +6,6 @@ using Ambev.DeveloperEvaluation.Domain.Validation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
-
 /// <summary>
 /// Represents a user in the system with authentication and profile information.
 /// This entity follows domain-driven design principles and includes business rules validation.
@@ -50,6 +49,21 @@ public class User : BaseEntity, IUser
     /// </summary>
     public UserStatus Status { get; set; }
 
+    /// <summary>
+    /// Gets or sets the user's name.
+    /// </summary>
+    public Name Name { get; set; } = new();
+
+    /// <summary>
+    /// Gets or sets the user's address.
+    /// </summary>
+    public Address Address { get; set; } = new();
+
+    /// <summary>
+    /// Navigation property to Carts.
+    /// </summary>
+    public ICollection<Cart> Carts { get; set; } = new List<Cart>();
+    
     /// <summary>
     /// Gets the date and time when the user was created.
     /// </summary>

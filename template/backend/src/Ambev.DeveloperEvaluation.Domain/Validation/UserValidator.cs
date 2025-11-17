@@ -28,5 +28,11 @@ public class UserValidator : AbstractValidator<User>
         RuleFor(user => user.Role)
             .NotEqual(UserRole.None)
             .WithMessage("User role cannot be None.");
+
+        RuleFor(user => user.Name)
+            .SetValidator(new NameValidator());
+
+        RuleFor(user => user.Address)
+            .SetValidator(new AddressValidator());
     }
 }

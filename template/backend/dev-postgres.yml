@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: developer-evaluation-db
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: Pass@word
+      POSTGRES_DB: DeveloperEvaluation
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
