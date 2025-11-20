@@ -17,16 +17,6 @@ public class Category : BaseEntity
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets the date and time when the category was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// Gets the date and time of the last update.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
-    /// <summary>
     /// Navigation property to Products.
     /// </summary>
     public ICollection<Product> Products { get; set; } = new List<Product>();

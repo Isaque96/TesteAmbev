@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,43 +8,80 @@ namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 /// <summary>
 /// Implementation of IUserRepository using Entity Framework Core
 /// </summary>
-public class UserRepository : IUserRepository
+public class UserRepository : Repository<User>, IUserRepository
 {
-    private readonly DefaultContext _context;
-
     /// <summary>
     /// Initializes a new instance of UserRepository
     /// </summary>
     /// <param name="context">The database context</param>
-    public UserRepository(DefaultContext context)
-    {
-        _context = context;
-    }
+    public UserRepository(DefaultContext context) : base(context) { }
 
-    /// <summary>
-    /// Creates a new user in the database
-    /// </summary>
-    /// <param name="user">The user to create</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created user</returns>
-    public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
+    public async Task<(IEnumerable<User> Items, int Count)> GetUsersPaginatedAsync(
+        int page,
+        int size,
+        string? order,
+        string? username = null,
+        string? email = null,
+        string? status = null,
+        string? role = null,
+        CancellationToken cancellationToken = default
+    )
     {
-        await _context.Users.AddAsync(user, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-        return user;
-    }
+        var query = DbSet.AsQueryable();
 
-    /// <summary>
-    /// Retrieves a user by their unique identifier
-    /// </summary>
-    /// <param name="id">The unique identifier of the user</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The user if found, null otherwise</returns>
-    public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        return await _context.Users.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
-    }
+        // Filtros básicos (igual doc de produtos, mas pra user)
+        if (!string.IsNullOrWhiteSpace(username))
+        {
+            if (username.StartsWith('*') && username.EndsWith('*'))
+            {
+                var value = username.Trim('*');
+                query = query.Where(u => EF.Functions.ILike(u.Username, $"%{value}%"));
+            }
+            else if (username.StartsWith('*'))
+            {
+                var value = username.TrimStart('*');
+                query = query.Where(u => EF.Functions.ILike(u.Username, $"%{value}"));
+            }
+            else if (username.EndsWith('*'))
+            {
+                var value = username.TrimEnd('*');
+                query = query.Where(u => EF.Functions.ILike(u.Username, $"{value}%"));
+            }
+            else
+            {
+                query = query.Where(u => u.Username == username);
+            }
+        }
 
+        if (!string.IsNullOrWhiteSpace(email))
+        {
+            query = query.Where(u => u.Email == email);
+        }
+
+        if (!string.IsNullOrWhiteSpace(status) && Enum.TryParse(status, out UserStatus statusEnum))
+        {
+            query = query.Where(u => u.Status == statusEnum);
+        }
+
+        if (!string.IsNullOrWhiteSpace(role) && Enum.TryParse(role, out UserRole roleEnum))
+        {
+            query = query.Where(u => u.Role == roleEnum);
+        }
+
+        // Total antes da paginação
+        var totalItems = await query.CountAsync(cancellationToken);
+
+        // Ordenação: "username asc, email desc"
+        query = ApplyOrdering(query, order);
+
+        var users = await query
+            .Skip((page - 1) * size)
+            .Take(size)
+            .ToListAsync(cancellationToken);
+        
+        return (users, totalItems);
+    }
+    
     /// <summary>
     /// Retrieves a user by their email address
     /// </summary>
@@ -52,24 +90,7 @@ public class UserRepository : IUserRepository
     /// <returns>The user if found, null otherwise</returns>
     public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
-        return await _context.Users
+        return await DbSet
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
-    }
-
-    /// <summary>
-    /// Deletes a user from the database
-    /// </summary>
-    /// <param name="id">The unique identifier of the user to delete</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>True if the user was deleted, false if not found</returns>
-    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        var user = await GetByIdAsync(id, cancellationToken);
-        if (user == null)
-            return false;
-
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync(cancellationToken);
-        return true;
     }
 }

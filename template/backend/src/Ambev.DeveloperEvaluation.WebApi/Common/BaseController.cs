@@ -3,21 +3,19 @@ using System.Security.Claims;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Common;
 
-[Route("api/[controller]")]
-[ApiController]
-public class BaseController : ControllerBase
+public abstract class BaseController : ControllerBase
 {
     protected int GetCurrentUserId() =>
-            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? throw new NullReferenceException());
+            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
     protected string GetCurrentUserEmail() =>
-        User.FindFirst(ClaimTypes.Email)?.Value ?? throw new NullReferenceException();
+        User.FindFirst(ClaimTypes.Email)!.Value;
 
-    protected IActionResult Ok<T>(T data) =>
-            base.Ok(new ApiResponseWithData<T> { Data = data, Success = true });
+    protected IActionResult Ok<T>(T? data = default, string message = "Sucesso", bool success = true) =>
+            base.Ok(new ApiResponseWithData<T> { Data = data, Success = success, Message = message });
 
-    protected IActionResult Created<T>(string routeName, object routeValues, T data) =>
-        base.CreatedAtRoute(routeName, routeValues, new ApiResponseWithData<T> { Data = data, Success = true });
+    protected IActionResult Created<T>(string routeName, object routeValues, T? data = default, string message = "Sucesso", bool success = true) =>
+        base.CreatedAtRoute(routeName, routeValues, new ApiResponseWithData<T> { Data = data, Message = message, Success = success });
 
     protected IActionResult BadRequest(string message) =>
         base.BadRequest(new ApiResponse { Message = message, Success = false });

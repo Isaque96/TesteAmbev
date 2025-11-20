@@ -3,39 +3,35 @@ using Ambev.DeveloperEvaluation.Domain.Entities;
 namespace Ambev.DeveloperEvaluation.Domain.Repositories;
 
 /// <summary>
-/// Repository interface for User entity operations
+/// Repository interface for User entity with specific operations
 /// </summary>
-public interface IUserRepository
+public interface IUserRepository : IRepository<User>
 {
     /// <summary>
-    /// Creates a new user in the repository
+    /// Retrieve users with pagination
     /// </summary>
-    /// <param name="user">The user to create</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The created user</returns>
-    Task<User> CreateAsync(User user, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Retrieves a user by their unique identifier
-    /// </summary>
-    /// <param name="id">The unique identifier of the user</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The user if found, null otherwise</returns>
-    Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-
+    /// <param name="page"></param>
+    /// <param name="size"></param>
+    /// <param name="order"></param>
+    /// <param name="username"></param>
+    /// <param name="email"></param>
+    /// <param name="status"></param>
+    /// <param name="role"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<(IEnumerable<User> Items, int Count)> GetUsersPaginatedAsync(
+        int page,
+        int size,
+        string? order,
+        string? username = null,
+        string? email = null,
+        string? status = null,
+        string? role = null,
+        CancellationToken cancellationToken = default
+    );
+    
     /// <summary>
     /// Retrieves a user by their email address
     /// </summary>
-    /// <param name="email">The email address to search for</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The user if found, null otherwise</returns>
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// Deletes a user from the repository
-    /// </summary>
-    /// <param name="id">The unique identifier of the user to delete</param>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>True if the user was deleted, false if not found</returns>
-    Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 }

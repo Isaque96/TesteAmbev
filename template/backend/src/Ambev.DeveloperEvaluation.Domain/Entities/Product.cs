@@ -42,16 +42,6 @@ public class Product : BaseEntity
     public Rating Rating { get; set; } = new();
 
     /// <summary>
-    /// Gets the date and time when the product was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// Gets the date and time of the last update.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
-    /// <summary>
     /// Navigation property to CartItems.
     /// </summary>
     public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();

@@ -22,16 +22,6 @@ public class Cart : BaseEntity
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// Gets the date and time when the cart was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// Gets the date and time of the last update.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
-    /// <summary>
     /// Navigation property to CartItems.
     /// </summary>
     public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
@@ -62,11 +52,13 @@ public class Cart : BaseEntity
     /// </summary>
     public void AddProduct(Guid productId, int quantity)
     {
-        if (quantity <= 0)
-            throw new ArgumentException("Quantity must be greater than zero.");
-
-        if (quantity > 20)
-            throw new InvalidOperationException("Cannot add more than 20 identical items.");
+        switch (quantity)
+        {
+            case <= 0:
+                throw new ArgumentException("Quantity must be greater than zero.");
+            case > 20:
+                throw new InvalidOperationException("Cannot add more than 20 identical items.");
+        }
 
         var existingItem = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
         
@@ -94,11 +86,15 @@ public class Cart : BaseEntity
     public void RemoveProduct(Guid productId)
     {
         var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-        if (item != null)
-        {
-            CartItems.Remove(item);
-            UpdatedAt = DateTime.UtcNow;
-        }
+        if (item == null) return;
+        CartItems.Remove(item);
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void ClearCart()
+    {
+        CartItems.Clear();
+        UpdatedAt = DateTime.UtcNow;
     }
 
     /// <summary>
@@ -106,15 +102,6 @@ public class Cart : BaseEntity
     /// </summary>
     public decimal CalculateTotal()
     {
-        decimal total = 0;
-
-        foreach (var item in CartItems)
-        {
-            decimal itemTotal = item.Product.Price * item.Quantity;
-            decimal discount = item.CalculateDiscount();
-            total += itemTotal - discount;
-        }
-
-        return total;
+        return (from item in CartItems let itemTotal = item.Product.Price * item.Quantity let discount = item.CalculateDiscount() select itemTotal - discount).Sum();
     }
 }

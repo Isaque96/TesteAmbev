@@ -31,16 +31,6 @@ public class CartItem : BaseEntity
     /// </summary>
     public int Quantity { get; set; }
 
-    /// <summary>
-    /// Gets the date and time when the cart item was created.
-    /// </summary>
-    public DateTime CreatedAt { get; set; }
-
-    /// <summary>
-    /// Gets the date and time of the last update.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
     public CartItem()
     {
         CreatedAt = DateTime.UtcNow;
@@ -65,14 +55,17 @@ public class CartItem : BaseEntity
     /// </summary>
     public void UpdateQuantity(int newQuantity)
     {
-        if (newQuantity <= 0)
-            throw new ArgumentException("Quantity must be greater than zero.");
-
-        if (newQuantity > 20)
-            throw new InvalidOperationException("Cannot have more than 20 identical items.");
-
-        Quantity = newQuantity;
-        UpdatedAt = DateTime.UtcNow;
+        switch (newQuantity)
+        {
+            case <= 0:
+                throw new ArgumentException("Quantity must be greater than zero.");
+            case > 20:
+                throw new InvalidOperationException("Cannot have more than 20 identical items.");
+            default:
+                Quantity = newQuantity;
+                UpdatedAt = DateTime.UtcNow;
+                break;
+        }
     }
 
     /// <summary>
@@ -86,14 +79,13 @@ public class CartItem : BaseEntity
         if (Quantity < 4)
             return 0;
 
-        decimal itemTotal = Product.Price * Quantity;
+        var itemTotal = Product.Price * Quantity;
 
-        if (Quantity >= 10 && Quantity <= 20)
-            return itemTotal * 0.20m;
-
-        if (Quantity >= 4 && Quantity <= 9)
-            return itemTotal * 0.10m;
-
-        return 0;
+        return Quantity switch
+        {
+            >= 10 and <= 20 => itemTotal * 0.20m,
+            >= 4 and <= 9 => itemTotal * 0.10m,
+            _ => 0
+        };
     }
 }
