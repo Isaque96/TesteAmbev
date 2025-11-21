@@ -1,0 +1,283 @@
+Summary
+  Generated on: 21/11/2025 - 17:46:56
+  Coverage date: 21/11/2025 - 17:46:54
+  Parser: Cobertura
+  Assemblies: 6
+  Classes: 251
+  Files: 244
+  Line coverage: 83.1%
+  Covered lines: 2635
+  Uncovered lines: 533
+  Coverable lines: 3168
+  Total lines: 7802
+  Branch coverage: 76% (219 of 288)
+  Covered branches: 219
+  Total branches: 288
+  Method coverage: 87.1% (652 of 748)
+  Full method coverage: 84.4% (632 of 748)
+  Covered methods: 652
+  Fully covered methods: 632
+  Total methods: 748
+
+Ambev.DeveloperEvaluation.Application                                                                            98.1%
+  Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser.AuthenticateUserCommand                             100%
+  Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser.AuthenticateUserHandler                             100%
+  Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser.AuthenticateUserProfile                             100%
+  Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser.AuthenticateUserResult                              100%
+  Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser.AuthenticateUserValidator                           100%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartCommand                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartCommandValidator                                100%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartHandler                                        83.3%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartProductItem                                     100%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartProfile                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.CreateCart.CreateCartResult                                          100%
+  Ambev.DeveloperEvaluation.Application.Cart.DeleteCart.DeleteCartCommand                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.DeleteCart.DeleteCartHandler                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.DeleteCart.DeleteCartResult                                          100%
+  Ambev.DeveloperEvaluation.Application.Cart.GetCart.GetCartHandler                                               100%
+  Ambev.DeveloperEvaluation.Application.Cart.GetCart.GetCartProductItem                                           100%
+  Ambev.DeveloperEvaluation.Application.Cart.GetCart.GetCartProfile                                               100%
+  Ambev.DeveloperEvaluation.Application.Cart.GetCart.GetCartQuery                                                 100%
+  Ambev.DeveloperEvaluation.Application.Cart.GetCart.GetCartResult                                                100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsHandler                                           100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsItem                                              100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsProductItem                                       100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsProfile                                           100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsQuery                                             100%
+  Ambev.DeveloperEvaluation.Application.Cart.ListCarts.ListCartsResult                                            100%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartCommand                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartCommandValidator                                100%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartHandler                                          88%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartProductItem                                     100%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartProfile                                         100%
+  Ambev.DeveloperEvaluation.Application.Cart.UpdateCart.UpdateCartResult                                          100%
+  Ambev.DeveloperEvaluation.Application.Categories.CreateCategory.CreateCategoryCommand                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.CreateCategory.CreateCategoryCommandValidator                  100%
+  Ambev.DeveloperEvaluation.Application.Categories.CreateCategory.CreateCategoryHandler                          93.3%
+  Ambev.DeveloperEvaluation.Application.Categories.CreateCategory.CreateCategoryProfile                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.CreateCategory.CreateCategoryResult                            100%
+  Ambev.DeveloperEvaluation.Application.Categories.DeleteCategory.DeleteCategoryCommand                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.DeleteCategory.DeleteCategoryHandler                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.DeleteCategory.DeleteCategoryResult                            100%
+  Ambev.DeveloperEvaluation.Application.Categories.GetCategory.GetCategoryHandler                                 100%
+  Ambev.DeveloperEvaluation.Application.Categories.GetCategory.GetCategoryProfile                                 100%
+  Ambev.DeveloperEvaluation.Application.Categories.GetCategory.GetCategoryQuery                                   100%
+  Ambev.DeveloperEvaluation.Application.Categories.GetCategory.GetCategoryResult                                  100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListCategories.ListCategoriesHandler                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListProductsByCategory.ListProductsByCategoryHandler           100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListProductsByCategory.ListProductsByCategoryItem              100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListProductsByCategory.ListProductsByCategoryProfile           100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListProductsByCategory.ListProductsByCategoryQuery             100%
+  Ambev.DeveloperEvaluation.Application.Categories.ListProductsByCategory.ListProductsByCategoryResult            100%
+  Ambev.DeveloperEvaluation.Application.Categories.UpdateCategory.UpdateCategoryCommand                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.UpdateCategory.UpdateCategoryCommandValidator                  100%
+  Ambev.DeveloperEvaluation.Application.Categories.UpdateCategory.UpdateCategoryHandler                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.UpdateCategory.UpdateCategoryProfile                           100%
+  Ambev.DeveloperEvaluation.Application.Categories.UpdateCategory.UpdateCategoryResult                            100%
+  Ambev.DeveloperEvaluation.Application.Messaging.Logging.LogMessageHandler                                         0%
+  Ambev.DeveloperEvaluation.Application.Products.Common.RatingDto                                                 100%
+  Ambev.DeveloperEvaluation.Application.Products.CreateProduct.CreateProductCommand                               100%
+  Ambev.DeveloperEvaluation.Application.Products.CreateProduct.CreateProductCommandValidator                      100%
+  Ambev.DeveloperEvaluation.Application.Products.CreateProduct.CreateProductHandler                               100%
+  Ambev.DeveloperEvaluation.Application.Products.CreateProduct.CreateProductProfile                               100%
+  Ambev.DeveloperEvaluation.Application.Products.CreateProduct.CreateProductResult                                100%
+  Ambev.DeveloperEvaluation.Application.Products.DeleteProduct.DeleteProductCommand                               100%
+  Ambev.DeveloperEvaluation.Application.Products.DeleteProduct.DeleteProductHandler                               100%
+  Ambev.DeveloperEvaluation.Application.Products.DeleteProduct.DeleteProductResult                                100%
+  Ambev.DeveloperEvaluation.Application.Products.GetProduct.GetProductHandler                                     100%
+  Ambev.DeveloperEvaluation.Application.Products.GetProduct.GetProductProfile                                     100%
+  Ambev.DeveloperEvaluation.Application.Products.GetProduct.GetProductQuery                                       100%
+  Ambev.DeveloperEvaluation.Application.Products.GetProduct.GetProductResult                                      100%
+  Ambev.DeveloperEvaluation.Application.Products.ListProducts.ListProductsHandler                                 100%
+  Ambev.DeveloperEvaluation.Application.Products.ListProducts.ListProductsItem                                    100%
+  Ambev.DeveloperEvaluation.Application.Products.ListProducts.ListProductsProfile                                 100%
+  Ambev.DeveloperEvaluation.Application.Products.ListProducts.ListProductsQuery                                   100%
+  Ambev.DeveloperEvaluation.Application.Products.ListProducts.ListProductsResult                                  100%
+  Ambev.DeveloperEvaluation.Application.Products.UpdateProduct.UpdateProductCommand                               100%
+  Ambev.DeveloperEvaluation.Application.Products.UpdateProduct.UpdateProductCommandValidator                      100%
+  Ambev.DeveloperEvaluation.Application.Products.UpdateProduct.UpdateProductHandler                               100%
+  Ambev.DeveloperEvaluation.Application.Products.UpdateProduct.UpdateProductProfile                               100%
+  Ambev.DeveloperEvaluation.Application.Products.UpdateProduct.UpdateProductResult                                100%
+  Ambev.DeveloperEvaluation.Application.Users.CreateUser.CreateUserCommand                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.CreateUser.CreateUserCommandValidator                               100%
+  Ambev.DeveloperEvaluation.Application.Users.CreateUser.CreateUserHandler                                       95.4%
+  Ambev.DeveloperEvaluation.Application.Users.CreateUser.CreateUserProfile                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.CreateUser.CreateUserResult                                        66.6%
+  Ambev.DeveloperEvaluation.Application.Users.DeleteUser.DeleteUserCommand                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.DeleteUser.DeleteUserHandler                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.DeleteUser.DeleteUserResponse                                       100%
+  Ambev.DeveloperEvaluation.Application.Users.DeleteUser.DeleteUserValidator                                      100%
+  Ambev.DeveloperEvaluation.Application.Users.GetUser.GetUserCommand                                              100%
+  Ambev.DeveloperEvaluation.Application.Users.GetUser.GetUserHandler                                              100%
+  Ambev.DeveloperEvaluation.Application.Users.GetUser.GetUserProfile                                              100%
+  Ambev.DeveloperEvaluation.Application.Users.GetUser.GetUserResult                                               100%
+  Ambev.DeveloperEvaluation.Application.Users.GetUser.GetUserValidator                                            100%
+  Ambev.DeveloperEvaluation.Application.Users.ListUsers.ListUsersHandler                                          100%
+  Ambev.DeveloperEvaluation.Application.Users.ListUsers.ListUsersItem                                             100%
+  Ambev.DeveloperEvaluation.Application.Users.ListUsers.ListUsersProfile                                          100%
+  Ambev.DeveloperEvaluation.Application.Users.ListUsers.ListUsersQuery                                            100%
+  Ambev.DeveloperEvaluation.Application.Users.ListUsers.ListUsersResult                                           100%
+  Ambev.DeveloperEvaluation.Application.Users.UpdateUser.UpdateUserCommand                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.UpdateUser.UpdateUserCommandValidator                               100%
+  Ambev.DeveloperEvaluation.Application.Users.UpdateUser.UpdateUserHandler                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.UpdateUser.UpdateUserProfile                                        100%
+  Ambev.DeveloperEvaluation.Application.Users.UpdateUser.UpdateUserResult                                         100%
+
+Ambev.DeveloperEvaluation.Common                                                                                 91.3%
+  Ambev.DeveloperEvaluation.Common.HealthChecks.HealthCheckExtensions                                             100%
+  Ambev.DeveloperEvaluation.Common.Logging.LoggingExtension                                                      79.3%
+  Ambev.DeveloperEvaluation.Common.Security.AuthenticationExtension                                              84.6%
+  Ambev.DeveloperEvaluation.Common.Security.BCryptPasswordHasher                                                  100%
+  Ambev.DeveloperEvaluation.Common.Security.JwtTokenGenerator                                                     100%
+  Ambev.DeveloperEvaluation.Common.Validation.ValidationBehavior<T1, T2>                                          100%
+  Ambev.DeveloperEvaluation.Common.Validation.ValidationErrorDetail                                               100%
+  Ambev.DeveloperEvaluation.Common.Validation.ValidationResultDetail                                              100%
+
+Ambev.DeveloperEvaluation.Domain                                                                                 94.9%
+  Ambev.DeveloperEvaluation.Domain.Common.BaseEntity                                                              100%
+  Ambev.DeveloperEvaluation.Domain.Entities.Address                                                               100%
+  Ambev.DeveloperEvaluation.Domain.Entities.Cart                                                                 97.8%
+  Ambev.DeveloperEvaluation.Domain.Entities.CartItem                                                             94.5%
+  Ambev.DeveloperEvaluation.Domain.Entities.Category                                                             93.7%
+  Ambev.DeveloperEvaluation.Domain.Entities.Geolocation                                                           100%
+  Ambev.DeveloperEvaluation.Domain.Entities.Name                                                                  100%
+  Ambev.DeveloperEvaluation.Domain.Entities.Product                                                              96.2%
+  Ambev.DeveloperEvaluation.Domain.Entities.Rating                                                                100%
+  Ambev.DeveloperEvaluation.Domain.Entities.User                                                                   81%
+  Ambev.DeveloperEvaluation.Domain.Events.UserRegisteredEvent                                                     100%
+  Ambev.DeveloperEvaluation.Domain.Exceptions.BadFormatException                                                  100%
+  Ambev.DeveloperEvaluation.Domain.Exceptions.DomainException                                                     100%
+  Ambev.DeveloperEvaluation.Domain.Helpers.ExceptionHelpers                                                         0%
+  Ambev.DeveloperEvaluation.Domain.Messaging.LogMessage                                                          87.5%
+  Ambev.DeveloperEvaluation.Domain.Specifications.ActiveUserSpecification                                         100%
+  Ambev.DeveloperEvaluation.Domain.Validation.AddressValidator                                                    100%
+  Ambev.DeveloperEvaluation.Domain.Validation.CartItemValidator                                                   100%
+  Ambev.DeveloperEvaluation.Domain.Validation.CartValidator                                                       100%
+  Ambev.DeveloperEvaluation.Domain.Validation.CategoryValidator                                                   100%
+  Ambev.DeveloperEvaluation.Domain.Validation.EmailValidator                                                      100%
+  Ambev.DeveloperEvaluation.Domain.Validation.GeolocationValidator                                                100%
+  Ambev.DeveloperEvaluation.Domain.Validation.NameValidator                                                       100%
+  Ambev.DeveloperEvaluation.Domain.Validation.PasswordValidator                                                   100%
+  Ambev.DeveloperEvaluation.Domain.Validation.PhoneValidator                                                      100%
+  Ambev.DeveloperEvaluation.Domain.Validation.ProductValidator                                                    100%
+  Ambev.DeveloperEvaluation.Domain.Validation.RatingValidator                                                     100%
+  Ambev.DeveloperEvaluation.Domain.Validation.UserValidator                                                       100%
+
+Ambev.DeveloperEvaluation.IoC                                                                                    10.5%
+  Ambev.DeveloperEvaluation.IoC.DependencyResolver                                                                100%
+  Ambev.DeveloperEvaluation.IoC.ModuleInitializers.ApplicationModuleInitializer                                   100%
+  Ambev.DeveloperEvaluation.IoC.ModuleInitializers.InfrastructureModuleInitializer                                100%
+  Ambev.DeveloperEvaluation.IoC.ModuleInitializers.WebApiModuleInitializer                                        100%
+  Ambev.DeveloperEvaluation.IoC.Seed.DatabaseSeeder                                                                 0%
+
+Ambev.DeveloperEvaluation.ORM                                                                                    88.6%
+  Ambev.DeveloperEvaluation.ORM.DefaultContext                                                                    100%
+  Ambev.DeveloperEvaluation.ORM.DefaultDbContextFactory                                                             0%
+  Ambev.DeveloperEvaluation.ORM.Mapping.CartConfiguration                                                         100%
+  Ambev.DeveloperEvaluation.ORM.Mapping.CartItemConfiguration                                                     100%
+  Ambev.DeveloperEvaluation.ORM.Mapping.CategoryConfiguration                                                     100%
+  Ambev.DeveloperEvaluation.ORM.Mapping.ProductConfiguration                                                      100%
+  Ambev.DeveloperEvaluation.ORM.Mapping.UserConfiguration                                                         100%
+  Ambev.DeveloperEvaluation.ORM.Repositories.CartRepository                                                       100%
+  Ambev.DeveloperEvaluation.ORM.Repositories.CategoryRepository                                                   100%
+  Ambev.DeveloperEvaluation.ORM.Repositories.ProductRepository                                                   66.6%
+  Ambev.DeveloperEvaluation.ORM.Repositories.Repository<T>                                                       98.8%
+  Ambev.DeveloperEvaluation.ORM.Repositories.UserRepository                                                      66.6%
+
+Ambev.DeveloperEvaluation.WebApi                                                                                 73.1%
+  Ambev.DeveloperEvaluation.WebApi.Common.ApiResponse                                                             100%
+  Ambev.DeveloperEvaluation.WebApi.Common.ApiResponseWithData<T>                                                  100%
+  Ambev.DeveloperEvaluation.WebApi.Common.BaseController                                                          100%
+  Ambev.DeveloperEvaluation.WebApi.Common.PaginatedList<T>                                                        100%
+  Ambev.DeveloperEvaluation.WebApi.Common.PaginatedRequest                                                       66.6%
+  Ambev.DeveloperEvaluation.WebApi.Common.PaginatedResponse<T>                                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthController                                                   100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature.AuthenticateUserProfile                  100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature.AuthenticateUserRequest                  100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature.AuthenticateUserRequestValidator         100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature.AuthenticateUserResponse                 100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.CartsController                                                  98%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.Common.CartItemDto                                              100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart.CreateCartProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart.CreateCartRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart.CreateCartRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateCart.CreateCartResponse                                    20%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart.DeleteCartProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart.DeleteCartRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart.DeleteCartRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCart.GetCartProfile                                          100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCart.GetCartRequest                                          100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCart.GetCartRequestValidator                                 100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCart.GetCartResponse                                        14.2%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.ListCarts.ListCartsProfile                                      100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.ListCarts.ListCartsRequest                                        0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.ListCarts.ListCartsResponse                                       0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart.UpdateCartProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart.UpdateCartRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart.UpdateCartRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Carts.UpdateCart.UpdateCartResponse                                  16.6%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.CategoriesController                                        98%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.CreateCategory.CreateCategoryProfile                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.CreateCategory.CreateCategoryRequest                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.CreateCategory.CreateCategoryRequestValidator              100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.CreateCategory.CreateCategoryResponse                       75%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.DeleteCategory.DeleteCategoryProfile                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.DeleteCategory.DeleteCategoryRequest                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.DeleteCategory.DeleteCategoryRequestValidator              100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.GetCategory.GetCategoryProfile                             100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.GetCategory.GetCategoryRequest                             100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.GetCategory.GetCategoryRequestValidator                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.GetCategory.GetCategoryResponse                             60%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.ListCategories.ListCategoriesProfile                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.ListCategories.ListCategoriesRequest                         0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.ListCategories.ListCategoriesResponse                       50%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.UpdateCategory.UpdateCategoryProfile                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.UpdateCategory.UpdateCategoryRequest                       100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.UpdateCategory.UpdateCategoryRequestValidator              100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Categories.UpdateCategory.UpdateCategoryResponse                       75%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.Common.RatingDto                                             100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct.CreateProductProfile                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct.CreateProductRequest                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct.CreateProductRequestValidator                  100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct.CreateProductResponse                         87.5%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct.DeleteProductProfile                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct.DeleteProductRequest                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct.DeleteProductRequestValidator                  100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct.GetProductProfile                                 100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct.GetProductRequest                                 100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct.GetProductRequestValidator                        100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct.GetProductResponse                               66.6%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts.ListProductsProfile                             100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts.ListProductsRequest                               0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts.ListProductsResponse                           71.4%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProductsByCategory.ListProductsByCategoryProfile         100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProductsByCategory.ListProductsByCategoryRequest           0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProductsByCategory.ListProductsByCategoryResponse          0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProductsByCategory.ListProductsByCategoryResponseItem      0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.ProductsController                                            78%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct.UpdateProductProfile                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct.UpdateProductRequest                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct.UpdateProductRequestValidator                  100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct.UpdateProductResponse                           75%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser.CreateUserProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser.CreateUserRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser.CreateUserRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.CreateUser.CreateUserResponse                                  66.6%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser.DeleteUserProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser.DeleteUserRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.DeleteUser.DeleteUserRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser.GetUserProfile                                          100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser.GetUserRequest                                          100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser.GetUserRequestValidator                                 100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.GetUser.GetUserResponse                                        66.6%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers.ListUsersProfile                                      100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers.ListUsersRequest                                        0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers.ListUsersRequestValidator                               0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.ListUsers.ListUsersResponse                                       0%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser.UpdateUserProfile                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser.UpdateUserRequest                                    100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser.UpdateUserRequestValidator                           100%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.UpdateUser.UpdateUserResponse                                    25%
+  Ambev.DeveloperEvaluation.WebApi.Features.Users.UsersController                                                98.1%
+  Ambev.DeveloperEvaluation.WebApi.Middleware.ValidationExceptionMiddleware                                         0%
+  Ambev.DeveloperEvaluation.WebApi.Program                                                                          0%
