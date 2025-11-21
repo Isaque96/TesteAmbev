@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
+using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Domain.Common;
 
@@ -9,8 +10,8 @@ public class BaseEntityTests
     {
         // Arrange
         var id = Guid.NewGuid();
-        var e1 = new TestEntity { Id = id };
-        var e2 = new TestEntity { Id = id };
+        var e1 = new BaseEntity { Id = id };
+        var e2 = new BaseEntity { Id = id };
 
         // Act
         var result = e1.Equals(e2);
@@ -23,8 +24,8 @@ public class BaseEntityTests
     public void Given_DifferentIds_When_Equals_Then_ReturnsFalse()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
-        var e2 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
+        var e2 = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act
         var result = e1.Equals(e2);
@@ -37,7 +38,7 @@ public class BaseEntityTests
     public void Given_NullObject_When_Equals_Then_ReturnsFalse()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act
         var result = e1.Equals(null);
@@ -51,8 +52,8 @@ public class BaseEntityTests
     {
         // Arrange
         var id = Guid.NewGuid();
-        var e1 = new TestEntity { Id = id };
-        var e2 = new TestEntity { Id = id };
+        var e1 = new BaseEntity { Id = id };
+        var e2 = new BaseEntity { Id = id };
 
         // Act
         var hash1 = e1.GetHashCode();
@@ -66,7 +67,7 @@ public class BaseEntityTests
     public void Given_EmptyGuid_When_GetHashCode_Then_ReturnsZero()
     {
         // Arrange
-        var e = new TestEntity { Id = Guid.Empty };
+        var e = new BaseEntity { Id = Guid.Empty };
 
         // Act
         var hash = e.GetHashCode();
@@ -79,7 +80,7 @@ public class BaseEntityTests
     public void Given_SameInstance_When_EqualityOperator_Then_ReturnsTrue()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
         var e2 = e1;
 
         // Act
@@ -94,8 +95,8 @@ public class BaseEntityTests
     {
         // Arrange
         var id = Guid.NewGuid();
-        var e1 = new TestEntity { Id = id };
-        var e2 = new TestEntity { Id = id };
+        var e1 = new BaseEntity { Id = id };
+        var e2 = new BaseEntity { Id = id };
 
         // Act
         var result = e1 == e2;
@@ -108,8 +109,8 @@ public class BaseEntityTests
     public void Given_DifferentIds_When_EqualityOperator_Then_ReturnsFalse()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
-        var e2 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
+        var e2 = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act
         var result = e1 == e2;
@@ -122,8 +123,8 @@ public class BaseEntityTests
     public void Given_OneNull_When_EqualityOperator_Then_ReturnsFalse()
     {
         // Arrange
-        TestEntity e1 = new() { Id = Guid.NewGuid() };
-        TestEntity? e2 = null;
+        BaseEntity e1 = new() { Id = Guid.NewGuid() };
+        BaseEntity? e2 = null;
 
         // Act
         var result1 = e1 == e2;
@@ -138,8 +139,8 @@ public class BaseEntityTests
     public void Given_BothNull_When_EqualityOperator_Then_ReturnsTrue()
     {
         // Arrange
-        TestEntity? e1 = null;
-        TestEntity? e2 = null;
+        BaseEntity? e1 = null;
+        BaseEntity? e2 = null;
 
         // Act
         var result = e1 == e2;
@@ -152,8 +153,8 @@ public class BaseEntityTests
     public void Given_DifferentIds_When_InequalityOperator_Then_ReturnsTrue()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
-        var e2 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
+        var e2 = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act
         var result = e1 != e2;
@@ -167,8 +168,8 @@ public class BaseEntityTests
     {
         // Arrange
         var id = Guid.NewGuid();
-        var e1 = new TestEntity { Id = id };
-        var e2 = new TestEntity { Id = id };
+        var e1 = new BaseEntity { Id = id };
+        var e2 = new BaseEntity { Id = id };
 
         // Act
         var result = e1 != e2;
@@ -181,7 +182,7 @@ public class BaseEntityTests
     public void Given_OtherNull_When_CompareTo_Then_ReturnsOne()
     {
         // Arrange
-        var e1 = new TestEntity { Id = Guid.NewGuid() };
+        var e1 = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act
         var result = e1.CompareTo(null);
@@ -197,13 +198,13 @@ public class BaseEntityTests
         var id1 = Guid.NewGuid();
         var id2 = Guid.NewGuid();
 
-        var e1 = new TestEntity { Id = id1 };
-        var e2 = new TestEntity { Id = id2 };
+        var e1 = new BaseEntity { Id = id1 };
+        var e2 = new BaseEntity { Id = id2 };
 
         // Act
         var result1 = e1.CompareTo(e2);
         var result2 = e2.CompareTo(e1);
-        var result3 = e1.CompareTo(new TestEntity { Id = id1 });
+        var result3 = e1.CompareTo(new BaseEntity { Id = id1 });
 
         // Assert
         Assert.Equal(-result1, result2);
@@ -221,8 +222,8 @@ public class BaseEntityTests
         var smallerId = id1.CompareTo(id2) < 0 ? id1 : id2;
         var greaterId = id1.CompareTo(id2) < 0 ? id2 : id1;
 
-        var smaller = new TestEntity { Id = smallerId };
-        var greater = new TestEntity { Id = greaterId };
+        var smaller = new BaseEntity { Id = smallerId };
+        var greater = new BaseEntity { Id = greaterId };
 
         // Act + Assert
         Assert.True(smaller < greater);
@@ -239,9 +240,9 @@ public class BaseEntityTests
         var id1 = Guid.NewGuid();
         var id2 = Guid.NewGuid();
 
-        var e1 = new TestEntity { Id = id1 };
-        var e2 = new TestEntity { Id = id2 };
-        var e1Copy = new TestEntity { Id = id1 };
+        var e1 = new BaseEntity { Id = id1 };
+        var e2 = new BaseEntity { Id = id2 };
+        var e1Copy = new BaseEntity { Id = id1 };
 
         // Act + Assert
         if (id1.CompareTo(id2) < 0)
@@ -272,8 +273,8 @@ public class BaseEntityTests
     public void Given_NullLeft_When_LessThanOrEqualAndGreaterThanOrEqual_Then_BehaveAsImplemented()
     {
         // Arrange
-        TestEntity? left = null;
-        var right = new TestEntity { Id = Guid.NewGuid() };
+        BaseEntity? left = null;
+        var right = new BaseEntity { Id = Guid.NewGuid() };
 
         // Act + Assert
         Assert.True(left <= right);
@@ -281,8 +282,8 @@ public class BaseEntityTests
         Assert.False(left >= right);
 
         // null vs null
-        TestEntity? nullLeft = null;
-        TestEntity? nullRight = null;
+        BaseEntity? nullLeft = null;
+        BaseEntity? nullRight = null;
 
         Assert.True(nullLeft <= nullRight); // left is null => returns true (right is null)
         Assert.True(nullLeft >= nullRight); // left is null and right is null => true
