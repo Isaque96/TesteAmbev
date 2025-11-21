@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <!-- Assemblies que voce QUER medir -->
+          <Include>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.Domain\.dll$</ModulePath>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.Application\.dll$</ModulePath>
+          </Include>
+
+          <!-- Excluir testes, infra, etc. -->
+          <Exclude>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.Unit\.dll$</ModulePath>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.Functional\.dll$</ModulePath>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.Integration\.dll$</ModulePath>
+            <ModulePath>.*Ambev\.DeveloperEvaluation\.WebApi\.dll$</ModulePath>
+
+            <Attribute>^System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Attribute>
+            <Attribute>^ObsoleteAttribute$</Attribute>
+          </Exclude>
+
+          <!-- Formato Cobertura -->
+          <Format>cobertura</Format>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
