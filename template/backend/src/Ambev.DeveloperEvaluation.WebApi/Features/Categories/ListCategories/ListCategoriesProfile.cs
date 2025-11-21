@@ -15,6 +15,5 @@ public class ListCategoriesProfile : Profile
     public ListCategoriesProfile()
     {
         CreateMap<ListCategoriesRequest, ListCategoriesQuery>();
-        CreateMap<Category, ListCategoriesResponse>();
     }
 }

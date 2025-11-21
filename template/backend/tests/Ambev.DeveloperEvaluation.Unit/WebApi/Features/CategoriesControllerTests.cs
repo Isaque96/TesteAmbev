@@ -121,7 +121,7 @@ public class CategoriesControllerTests
     {
         var controller = CreateController();
 
-        var request = new ListCategoriesRequest { Page = 1, Size = 10 };
+        var request = new ListCategoriesRequest();
         var appResult = new List<string>();
         var apiResponse = new ListCategoriesResponse();
 
@@ -137,7 +137,6 @@ public class CategoriesControllerTests
 
         _mapper.Received(1).Map<ListCategoriesQuery>(request);
         await _mediator.Received(1).Send(Arg.Any<ListCategoriesQuery>(), Arg.Any<CancellationToken>());
-        _mapper.Received(1).Map<ListCategoriesResponse>(appResult);
     }
 
     #endregion

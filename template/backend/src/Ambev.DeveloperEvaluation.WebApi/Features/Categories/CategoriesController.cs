@@ -67,7 +67,7 @@ public class CategoriesController(IMediator mediator, IMapper mapper) : BaseCont
         var command = mapper.Map<ListCategoriesQuery>(request);
         var response = await mediator.Send(command, cancellationToken);
 
-        return Ok(mapper.Map<ListCategoriesResponse>(response), "Categories listed successfully");
+        return Ok(response, "Categories listed successfully");
     }
 
     [HttpPut("{id:guid}")]
