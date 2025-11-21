@@ -20,7 +20,7 @@ public class CreateCategoryHandler(ICategoryRepository categoryRepository, IMapp
         // Evita duplicidade de nome
         var exists = await categoryRepository.ExistsByNameAsync(command.Name, cancellationToken);
         if (exists)
-            throw new ValidationException($"Category '{command.Name}' already exists.");
+            throw new ValidationException($"CategoryName '{command.Name}' already exists.");
 
         var category = mapper.Map<Category>(command);
 

@@ -30,7 +30,7 @@ public class CreateProductCommand : IRequest<CreateProductResult>
     /// <summary>
     /// Gets or sets the category of the product.
     /// </summary>
-    public string Category { get; set; } = string.Empty;
+    public string CategoryName { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the image URL of the product.

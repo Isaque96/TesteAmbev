@@ -112,5 +112,4 @@ public class ProductRepository(DefaultContext context) : Repository<Product>(con
 
         return  (items, totalItems);
     }
-
 }

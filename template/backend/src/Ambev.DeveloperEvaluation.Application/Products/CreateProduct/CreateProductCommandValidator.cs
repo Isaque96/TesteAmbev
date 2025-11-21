@@ -20,7 +20,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .NotEmpty()
             .MaximumLength(1000);
 
-        RuleFor(p => p.Category)
+        RuleFor(p => p.CategoryName)
             .NotEmpty()
             .MaximumLength(100);
 

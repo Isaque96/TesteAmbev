@@ -8,7 +8,6 @@ using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
 using Serilog.Sinks.SystemConsole.Themes;
-using Serilog.Templates;
 using System.Diagnostics;
 
 namespace Ambev.DeveloperEvaluation.Common.Logging;
@@ -19,16 +18,16 @@ namespace Ambev.DeveloperEvaluation.Common.Logging;
 public static class LoggingExtension
 {
     /// <summary>
-    /// The destructuring options builder configured with default destructurers and a custom DbUpdateExceptionDestructurer.
+    /// The destructuring options builder configured with default destructures and a custom DbUpdateExceptionDestructurer.
     /// </summary>
-    private static readonly DestructuringOptionsBuilder _destructuringOptionsBuilder = new DestructuringOptionsBuilder()
+    private static readonly DestructuringOptionsBuilder DestructuringOptionsBuilder = new DestructuringOptionsBuilder()
         .WithDefaultDestructurers()
         .WithDestructurers([new DbUpdateExceptionDestructurer()]);
 
     /// <summary>
     /// A filter predicate to exclude log events with specific criteria.
     /// </summary>
-    private static readonly Func<LogEvent, bool> _filterPredicate = exclusionPredicate =>
+    private static readonly Func<LogEvent, bool> FilterPredicate = exclusionPredicate =>
     {
 
         if (exclusionPredicate.Level != LogEventLevel.Information) return true;
@@ -48,7 +47,7 @@ public static class LoggingExtension
     /// <param name="builder">The <see cref="WebApplicationBuilder" /> to add services to.</param>
     /// <returns>A <see cref="WebApplicationBuilder"/> that can be used to further configure the API services.</returns>
     /// <remarks>
-    /// <para>Logging output are diferents on Debug and Release modes.</para>
+    /// <para>Logging output are different on Debug and Release modes.</para>
     /// </remarks> 
     public static WebApplicationBuilder AddDefaultLogging(this WebApplicationBuilder builder)
     {
@@ -61,8 +60,8 @@ public static class LoggingExtension
                 .Enrich.WithProperty("Environment", builder.Environment.EnvironmentName)
                 .Enrich.WithProperty("Application", builder.Environment.ApplicationName)
                 .Enrich.FromLogContext()
-                .Enrich.WithExceptionDetails(_destructuringOptionsBuilder)
-                .Filter.ByExcluding(_filterPredicate);
+                .Enrich.WithExceptionDetails(DestructuringOptionsBuilder)
+                .Filter.ByExcluding(FilterPredicate);
 
             if (Debugger.IsAttached)
             {
@@ -89,7 +88,7 @@ public static class LoggingExtension
         return builder;
     }
 
-    /// <summary>Adds middleware for Swagger documetation generation.</summary>
+    /// <summary>Adds middleware for Swagger documentation generation.</summary>
     /// <param name="app">The <see cref="WebApplication"/> instance this method extends.</param>
     /// <returns>The <see cref="WebApplication"/> for Swagger documentation.</returns>
     public static WebApplication UseDefaultLogging(this WebApplication app)

@@ -1,3 +1,4 @@
+using System.Globalization;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Bogus;
@@ -11,19 +12,33 @@ namespace Ambev.DeveloperEvaluation.Unit.Domain.Entities.TestData;
 /// </summary>
 public static class UserTestData
 {
+    // Faker para Geolocation
+    private static readonly Faker<Geolocation> GeolocationFaker = new Faker<Geolocation>()
+        .RuleFor(g => g.Lat, f => f.Random.Decimal(min: -90, max: 90, decimals: 6).ToString(CultureInfo.InvariantCulture))
+        .RuleFor(g => g.Long, f => f.Random.Decimal(min: -180, max: 180, decimals: 6).ToString(CultureInfo.InvariantCulture));
+
+    // Faker para Address
+    private static readonly Faker<Address> AddressFaker = new Faker<Address>()
+        .RuleFor(a => a.City, f => f.Address.City())
+        .RuleFor(a => a.Street, f => f.Address.StreetName())
+        .RuleFor(a => a.ZipCode, f => f.Address.ZipCode())
+        .RuleFor(a => a.Number, f => f.Random.Int(1, 10000))
+        .RuleFor(a => a.Geolocation, _ => GeolocationFaker.Generate());
+
+    // Faker para Name
+    private static readonly Faker<Name> NameFaker = new Faker<Name>()
+        .RuleFor(n => n.FirstName, f => f.Name.FirstName())
+        .RuleFor(n => n.LastName, f => f.Name.LastName());
+
     /// <summary>
     /// Configures the Faker to generate valid User entities.
-    /// The generated users will have valid:
-    /// - Username (using internet usernames)
-    /// - Password (meeting complexity requirements)
-    /// - Email (valid format)
-    /// - Phone (Brazilian format)
-    /// - Status (Active or Suspended)
-    /// - Role (Customer or Admin)
     /// </summary>
+    // Faker para User
     private static readonly Faker<User> UserFaker = new Faker<User>()
         .RuleFor(u => u.Username, f => f.Internet.UserName())
         .RuleFor(u => u.Password, f => $"Test@{f.Random.Number(100, 999)}")
+        .RuleFor(u => u.Name, _ => NameFaker.Generate())
+        .RuleFor(u => u.Address, _ => AddressFaker.Generate())
         .RuleFor(u => u.Email, f => f.Internet.Email())
         .RuleFor(u => u.Phone, f => $"+55{f.Random.Number(11, 99)}{f.Random.Number(100000000, 999999999)}")
         .RuleFor(u => u.Status, f => f.PickRandom(UserStatus.Active, UserStatus.Suspended))
@@ -149,5 +164,13 @@ public static class UserTestData
     public static string GenerateLongUsername()
     {
         return new Faker().Random.String2(51);
+    }
+}
+public static class ExtensionsForRandomizer
+{
+    public static decimal Decimal(this Randomizer r, decimal min = 0.0m, decimal max = 1.0m, int? decimals = null)
+    {
+        var value = r.Decimal(min, max);
+        return decimals.HasValue ? Math.Round(value, decimals.Value) : value;
     }
 }

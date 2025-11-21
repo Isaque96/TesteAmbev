@@ -18,6 +18,5 @@ public class UpdateProductProfile : Profile
         CreateMap<UpdateProductRequest, UpdateProductCommand>();
         CreateMap<UpdateProductResult, UpdateProductResponse>()
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Id));
-        CreateMap<RatingDto, Rating>().ReverseMap();
     }
 }

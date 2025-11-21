@@ -37,7 +37,7 @@ public class CategoriesController(IMediator mediator, IMapper mapper) : BaseCont
             nameof(GetCategory),
             response,
             mapper.Map<CreateCategoryResponse>(response),
-            "Category created successfully"
+            "CategoryName created successfully"
         );
     }
 
@@ -57,7 +57,7 @@ public class CategoriesController(IMediator mediator, IMapper mapper) : BaseCont
         var command = mapper.Map<GetCategoryQuery>(request.Id);
         var response = await mediator.Send(command, cancellationToken);
 
-        return Ok(mapper.Map<GetCategoryResponse>(response), "Category retrieved successfully");
+        return Ok(mapper.Map<GetCategoryResponse>(response), "CategoryName retrieved successfully");
     }
 
     [HttpGet]
@@ -88,7 +88,7 @@ public class CategoriesController(IMediator mediator, IMapper mapper) : BaseCont
         var command = mapper.Map<UpdateCategoryCommand>(request);
         var response = await mediator.Send(command, cancellationToken);
 
-        return Ok(mapper.Map<UpdateCategoryResponse>(response), "Category updated successfully");
+        return Ok(mapper.Map<UpdateCategoryResponse>(response), "CategoryName updated successfully");
     }
 
     [HttpDelete("{id:guid}")]
@@ -107,6 +107,6 @@ public class CategoriesController(IMediator mediator, IMapper mapper) : BaseCont
         var command = mapper.Map<DeleteCategoryCommand>(request.Id);
         await mediator.Send(command, cancellationToken);
 
-        return Ok<object>(message: "Category deleted successfully");
+        return Ok<object>(message: "CategoryName deleted successfully");
     }
 }

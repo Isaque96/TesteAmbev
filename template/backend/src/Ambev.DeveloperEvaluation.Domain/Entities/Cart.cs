@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using AutoMapper.Configuration.Annotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -14,6 +15,7 @@ public class Cart : BaseEntity
     /// <summary>
     /// Navigation property to User.
     /// </summary>
+    [Ignore]
     public User User { get; set; } = null!;
 
     /// <summary>
@@ -24,6 +26,7 @@ public class Cart : BaseEntity
     /// <summary>
     /// Navigation property to CartItems.
     /// </summary>
+    [Ignore]
     public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     public Cart()
@@ -88,12 +91,6 @@ public class Cart : BaseEntity
         var item = CartItems.FirstOrDefault(ci => ci.ProductId == productId);
         if (item == null) return;
         CartItems.Remove(item);
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    public void ClearCart()
-    {
-        CartItems.Clear();
         UpdatedAt = DateTime.UtcNow;
     }
 

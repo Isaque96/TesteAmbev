@@ -24,7 +24,7 @@ public class UpdateProductHandler(IProductRepository productRepository, ICategor
         existing.Title = command.Title;
         existing.UpdatePrice(command.Price);
         existing.Description = command.Description;
-        existing.Category = await categoryRepository.GetCategoryByNameAsync(command.Category, cancellationToken);
+        existing.Category = await categoryRepository.GetCategoryByNameAsync(command.CategoryName, cancellationToken);
         existing.Image = command.Image;
         existing.Rating.Rate = command.Rate;
         existing.Rating.Count = command.Count;

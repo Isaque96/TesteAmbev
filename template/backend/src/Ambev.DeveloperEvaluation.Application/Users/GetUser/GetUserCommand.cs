@@ -10,7 +10,7 @@ public record GetUserCommand : IRequest<GetUserResult>
     /// <summary>
     /// The unique identifier of the user to retrieve
     /// </summary>
-    public Guid Id { get; }
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Initializes a new instance of GetUserCommand
@@ -20,4 +20,9 @@ public record GetUserCommand : IRequest<GetUserResult>
     {
         Id = id;
     }
+
+    /// <summary>
+    /// Initializes a new instance of GetUserCommand
+    /// </summary>
+    public GetUserCommand() { }
 }

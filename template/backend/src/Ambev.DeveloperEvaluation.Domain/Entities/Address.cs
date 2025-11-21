@@ -1,4 +1,6 @@
-﻿namespace Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using AutoMapper.Configuration.Annotations;
+
+namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
 /// <summary>
 /// Represents a user's address.
@@ -9,5 +11,6 @@ public class Address
     public string Street { get; set; } = string.Empty;
     public int Number { get; set; }
     public string ZipCode { get; set; } = string.Empty;
+    [Ignore]
     public Geolocation Geolocation { get; set; } = new();
 }

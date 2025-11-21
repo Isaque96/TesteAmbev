@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using AutoMapper.Configuration.Annotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -14,6 +15,7 @@ public class CartItem : BaseEntity
     /// <summary>
     /// Navigation property to Cart.
     /// </summary>
+    [Ignore]
     public Cart Cart { get; set; } = null!;
 
     /// <summary>
@@ -24,6 +26,7 @@ public class CartItem : BaseEntity
     /// <summary>
     /// Navigation property to Product.
     /// </summary>
+    [Ignore]
     public Product Product { get; set; } = null!;
 
     /// <summary>

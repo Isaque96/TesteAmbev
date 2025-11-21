@@ -18,12 +18,12 @@ public class UpdateCategoryHandler(ICategoryRepository categoryRepository, IMapp
 
         var category = await categoryRepository.GetByIdAsync(command.Id, cancellationToken);
         if (category == null)
-            throw new KeyNotFoundException($"Category with id {command.Id} was not found.");
+            throw new KeyNotFoundException($"CategoryName with id {command.Id} was not found.");
 
         // Garantir nome único (opcional)
         var exists = await categoryRepository.ExistsByNameExceptIdAsync(command.Name, command.Id, cancellationToken);
         if (exists)
-            throw new ValidationException($"Category '{command.Name}' already exists.");
+            throw new ValidationException($"CategoryName '{command.Name}' already exists.");
 
         category.Name = command.Name;
         category.Description = command.Description;

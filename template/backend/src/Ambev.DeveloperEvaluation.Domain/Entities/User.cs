@@ -3,6 +3,7 @@ using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using AutoMapper.Configuration.Annotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -52,16 +53,19 @@ public class User : BaseEntity, IUser
     /// <summary>
     /// Gets or sets the user's name.
     /// </summary>
+    [Ignore]
     public Name Name { get; set; } = new();
 
     /// <summary>
     /// Gets or sets the user's address.
     /// </summary>
+    [Ignore]
     public Address Address { get; set; } = new();
 
     /// <summary>
     /// Navigation property to Carts.
     /// </summary>
+    [Ignore]
     public ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     /// <summary>

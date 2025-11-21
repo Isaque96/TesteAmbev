@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using AutoMapper.Configuration.Annotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -19,6 +20,7 @@ public class Category : BaseEntity
     /// <summary>
     /// Navigation property to Products.
     /// </summary>
+    [Ignore]
     public ICollection<Product> Products { get; set; } = new List<Product>();
 
     public Category()

@@ -17,7 +17,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products;
 /// Controller for managing products
 /// </summary>
 [ApiController]
-[Route("products")]
+[Route("api/[controller]")]
 public class ProductsController(IMediator mediator, IMapper mapper) : BaseController
 {
     /// <summary>
@@ -171,7 +171,7 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
     /// <summary>
     /// Retrieves products by category with pagination
     /// </summary>
-    /// <param name="category">Category name</param>
+    /// <param name="category">CategoryName name</param>
     /// <param name="page">Page number (default: 1)</param>
     /// <param name="size">Page size (default: 10)</param>
     /// <param name="order">Ordering (e.g., "price desc, title asc")</param>

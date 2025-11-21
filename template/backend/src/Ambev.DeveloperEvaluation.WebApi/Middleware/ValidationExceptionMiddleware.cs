@@ -5,20 +5,18 @@ using System.Text.Json;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Middleware;
 
-public class ValidationExceptionMiddleware
+public class ValidationExceptionMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public ValidationExceptionMiddleware(RequestDelegate next)
+    private static readonly JsonSerializerOptions JsonOptions = new()
     {
-        _next = next;
-    }
-
+        PropertyNamingPolicy =  JsonNamingPolicy.CamelCase
+    };
+    
     public async Task InvokeAsync(HttpContext context)
     {
         try
         {
-            await _next(context);
+            await next(context);
         }
         catch (ValidationException ex)
         {
@@ -39,11 +37,6 @@ public class ValidationExceptionMiddleware
                 .Select(error => (ValidationErrorDetail)error)
         };
 
-        var jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
-        return context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions));
+        return context.Response.WriteAsync(JsonSerializer.Serialize(response, JsonOptions));
     }
 }

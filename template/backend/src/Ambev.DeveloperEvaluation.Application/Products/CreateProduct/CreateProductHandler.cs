@@ -9,7 +9,7 @@ namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 /// <summary>
 /// Handler for processing CreateProductCommand requests
 /// </summary>
-public class CreateProductHandler(IProductRepository productRepository, IMapper mapper)
+public class CreateProductHandler(ICategoryRepository categoryRepository, IProductRepository productRepository, IMapper mapper)
     : IRequestHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -20,9 +20,11 @@ public class CreateProductHandler(IProductRepository productRepository, IMapper 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        // Aqui você poderia validar duplicidade se existir alguma regra (ex: mesmo título + categoria).
-
+        var category = await categoryRepository.GetCategoryByNameAsync(command.CategoryName, cancellationToken);
+        
         var product = mapper.Map<Product>(command);
+        product.Category = category;
+        
         var created = await productRepository.CreateAsync(product, cancellationToken);
 
         return mapper.Map<CreateProductResult>(created);

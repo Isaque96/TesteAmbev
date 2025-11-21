@@ -12,7 +12,7 @@ public class GetCategoryHandler(ICategoryRepository categoryRepository, IMapper 
         var category = await categoryRepository.GetByIdAsync(request.Id, cancellationToken);
 
         return category == null ?
-            throw new KeyNotFoundException($"Category with id {request.Id} was not found.") :
+            throw new KeyNotFoundException($"CategoryName with id {request.Id} was not found.") :
             mapper.Map<GetCategoryResult>(category);
     }
 }

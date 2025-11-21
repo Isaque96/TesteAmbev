@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using AutoMapper.Configuration.Annotations;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
@@ -7,16 +8,19 @@ public class BaseEntity : IComparable<BaseEntity>
     /// <summary>
     /// The Unique Identifier
     /// </summary>
+    [Ignore]
     public Guid Id { get; set; } = Guid.NewGuid();
 
     /// <summary>
     /// Gets the date and time when the category was created.
     /// </summary>
+    [Ignore]
     public DateTime CreatedAt { get; set; }
 
     /// <summary>
     /// Gets the date and time of the last update.
     /// </summary>
+    [Ignore]
     public DateTime? UpdatedAt { get; set; }
 
     public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
@@ -26,8 +30,7 @@ public class BaseEntity : IComparable<BaseEntity>
 
     public int CompareTo(BaseEntity? other)
     {
-        if (other == null) return 1;
-        return Id.CompareTo(other.Id);
+        return other == null ? 1 : Id.CompareTo(other.Id);
     }
 
     public override bool Equals(object? obj)

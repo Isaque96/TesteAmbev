@@ -58,6 +58,7 @@ public class UserTests
         var result = user.Validate();
 
         // Assert
+        Assert.Empty(result.Errors);
         Assert.True(result.IsValid);
         Assert.Empty(result.Errors);
     }

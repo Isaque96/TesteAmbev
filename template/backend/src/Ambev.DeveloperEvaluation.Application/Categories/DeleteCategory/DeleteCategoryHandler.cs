@@ -11,7 +11,7 @@ public class DeleteCategoryHandler(ICategoryRepository categoryRepository)
         var deleted = await categoryRepository.DeleteAsync(request.Id, cancellationToken);
 
         return !deleted ?
-            throw new KeyNotFoundException($"Category with id {request.Id} was not found.") :
+            throw new KeyNotFoundException($"CategoryName with id {request.Id} was not found.") :
             new DeleteCategoryResult { Deleted = true };
     }
 }

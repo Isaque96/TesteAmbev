@@ -19,8 +19,6 @@ public class GetProductProfile : Profile
             .ConstructUsing(id => new GetProductQuery { Id = id });
         
         CreateMap<GetProductResult, GetProductResponse>()
-            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
-        
-        CreateMap<Rating, RatingDto>().ReverseMap();
+            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.CategoryName));
     }
 }

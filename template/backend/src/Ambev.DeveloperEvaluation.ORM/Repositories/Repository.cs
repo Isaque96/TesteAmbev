@@ -21,7 +21,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     /// Initializes a new instance of Repository
     /// </summary>
     /// <param name="context">The database context</param>
-    protected Repository(DefaultContext context)
+    public Repository(DefaultContext context)
     {
         Context = context;
         DbSet = context.Set<TEntity>();
@@ -160,7 +160,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
             {
                 0 => throw new BadFormatException("_order", "property asc|desc"),
                 1 => "asc",
-                _ => keyValue[1]
+                2 => keyValue[1],
+                _ => throw new BadFormatException("_order", "property asc|desc")
             };
         }
 

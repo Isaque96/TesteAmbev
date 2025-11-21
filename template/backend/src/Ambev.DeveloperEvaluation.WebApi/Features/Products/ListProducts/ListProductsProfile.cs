@@ -18,6 +18,5 @@ public class ListProductsProfile : Profile
         CreateMap<ListProductsRequest, ListProductsQuery>();
         CreateMap<Product, ListProductsResponse>()
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name));
-        CreateMap<Rating, RatingDto>().ReverseMap();
     }
 }
