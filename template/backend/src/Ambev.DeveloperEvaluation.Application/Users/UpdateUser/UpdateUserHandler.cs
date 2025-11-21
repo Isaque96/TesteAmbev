@@ -1,12 +1,14 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.Domain.Messaging;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.UpdateUser;
 
-public class UpdateUserHandler(IUserRepository userRepository, IMapper mapper)
+public class UpdateUserHandler(IUserRepository userRepository, IMapper mapper, IBus bus)
     : IRequestHandler<UpdateUserCommand, UpdateUserResult>
 {
     public async Task<UpdateUserResult> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
@@ -44,6 +46,8 @@ public class UpdateUserHandler(IUserRepository userRepository, IMapper mapper)
         user.Address.Geolocation.Long = command.Long;
 
         var updated = await userRepository.UpdateAsync(user, cancellationToken);
+
+        await bus.Publish(new LogMessage("UpdateUserEvent", updated));
 
         return mapper.Map<UpdateUserResult>(updated);
     }

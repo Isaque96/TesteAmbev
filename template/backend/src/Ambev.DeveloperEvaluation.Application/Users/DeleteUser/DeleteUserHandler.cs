@@ -1,6 +1,8 @@
+using Ambev.DeveloperEvaluation.Domain.Messaging;
 using MediatR;
 using FluentValidation;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 
@@ -10,16 +12,18 @@ namespace Ambev.DeveloperEvaluation.Application.Users.DeleteUser;
 public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserResponse>
 {
     private readonly IUserRepository _userRepository;
+    private readonly IBus _bus;
 
     /// <summary>
     /// Initializes a new instance of DeleteUserHandler
     /// </summary>
     /// <param name="userRepository">The user repository</param>
-    /// <param name="validator">The validator for DeleteUserCommand</param>
+    /// <param name="bus"></param>
     public DeleteUserHandler(
-        IUserRepository userRepository)
+        IUserRepository userRepository, IBus bus)
     {
         _userRepository = userRepository;
+        _bus = bus;
     }
 
     /// <summary>
@@ -37,9 +41,9 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserRe
             throw new ValidationException(validationResult.Errors);
 
         var success = await _userRepository.DeleteAsync(request.Id, cancellationToken);
-        if (!success)
-            throw new KeyNotFoundException($"User with ID {request.Id} not found");
-
-        return new DeleteUserResponse { Success = true };
+        
+        await _bus.Publish(new LogMessage("DeleteUser", new { UserId = request.Id }));
+        
+        return !success ? throw new KeyNotFoundException($"User with ID {request.Id} not found") : new DeleteUserResponse { Success = true };
     }
 }

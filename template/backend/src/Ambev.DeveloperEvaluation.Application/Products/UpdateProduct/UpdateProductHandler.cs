@@ -1,11 +1,13 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Messaging;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 
-public class UpdateProductHandler(IProductRepository productRepository, ICategoryRepository categoryRepository, IMapper mapper)
+public class UpdateProductHandler(IProductRepository productRepository, ICategoryRepository categoryRepository, IMapper mapper, IBus bus)
     : IRequestHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
@@ -30,6 +32,9 @@ public class UpdateProductHandler(IProductRepository productRepository, ICategor
         existing.Rating.Count = command.Count;
 
         var updated = await productRepository.UpdateAsync(existing, cancellationToken);
+        
+        await bus.Publish(new LogMessage("UpdateProduct", updated));
+        
         return mapper.Map<UpdateProductResult>(updated);
     }
 }

@@ -1,3 +1,4 @@
+using System.Reflection;
 using Ambev.DeveloperEvaluation.Application;
 using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
@@ -5,13 +6,15 @@ using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Seed;
 using Ambev.DeveloperEvaluation.IoC;
+using Ambev.DeveloperEvaluation.IoC.Seed;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Rebus.Config;
+using Rebus.Transport.InMem;
 using Serilog;
-using LoggerExtensions = Microsoft.Extensions.Logging.LoggerExtensions;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
 
@@ -71,6 +74,22 @@ public static class Program
                 )
             );
 
+            builder.Services.AddSingleton(new InMemNetwork());
+            builder.Services.AddRebus((configure, provider) =>
+            {
+                var network = provider.GetRequiredService<InMemNetwork>();
+
+                return configure
+                    .Transport(t => t.UseInMemoryTransport(network, "logs-queue"))
+                    .Options(o =>
+                    {
+                        o.SetNumberOfWorkers(1);
+                        o.SetMaxParallelism(5);
+                    });
+            });
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            builder.Services.AutoRegisterHandlersFromAssembly(currentAssembly);
+
             builder.Services.AddJwtAuthentication(builder.Configuration);
 
             builder.RegisterDependencies();
@@ -86,6 +105,7 @@ public static class Program
             });
 
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
             var app = builder.Build();
             

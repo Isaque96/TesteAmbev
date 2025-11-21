@@ -5,6 +5,8 @@ using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Ambev.DeveloperEvaluation.Unit.Helpers;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using NSubstitute;
+using Rebus.Bus;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Product;
@@ -14,7 +16,8 @@ public class UpdateProductHandlerTests
     {
         var (context, productRepository) = TestHelper.CreateContextAndRepository<DefaultContext, ProductRepository>();
         var mapper = Helper.CreateMapper();
-        var handler = new UpdateProductHandler(productRepository, new CategoryRepository(context), mapper);
+        var bus = Substitute.For<IBus>();
+        var handler = new UpdateProductHandler(productRepository, new CategoryRepository(context), mapper, bus);
         return (context, handler);
     }
 

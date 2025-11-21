@@ -3,6 +3,8 @@ using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Ambev.DeveloperEvaluation.Unit.Helpers;
+using NSubstitute;
+using Rebus.Bus;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Product;
@@ -12,7 +14,8 @@ public class DeleteProductHandlerTests
     private static (DefaultContext context, DeleteProductHandler handler) CreateHandler()
     {
         var (context, repository) = TestHelper.CreateContextAndRepository<DefaultContext, ProductRepository>();
-        var handler = new DeleteProductHandler(repository);
+        var bus = Substitute.For<IBus>();
+        var handler = new DeleteProductHandler(repository, bus);
         return (context, handler);
     }
 

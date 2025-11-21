@@ -4,6 +4,8 @@ using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Ambev.DeveloperEvaluation.Unit.Helpers;
 using FluentValidation;
+using NSubstitute;
+using Rebus.Bus;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.User;
@@ -14,7 +16,8 @@ public class UpdateUserHandlerTests
     {
         var (context, repository) = TestHelper.CreateContextAndRepository<DefaultContext, UserRepository>();
         var mapper = Helper.CreateMapper();
-        var handler = new UpdateUserHandler(repository, mapper);
+        var bus = Substitute.For<IBus>();
+        var handler = new UpdateUserHandler(repository, mapper, bus);
         return (context, handler);
     }
 

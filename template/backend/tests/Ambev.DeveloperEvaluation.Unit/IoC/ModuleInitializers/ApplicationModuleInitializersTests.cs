@@ -1,13 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Common.Security;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.IoC;
 using Ambev.DeveloperEvaluation.IoC.ModuleInitializers;
-using Ambev.DeveloperEvaluation.ORM;
-using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.IoC.ModuleInitializers;

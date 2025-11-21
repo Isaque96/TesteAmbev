@@ -3,6 +3,8 @@ using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Ambev.DeveloperEvaluation.Unit.Helpers;
 using Microsoft.EntityFrameworkCore;
+using NSubstitute;
+using Rebus.Bus;
 using Xunit;
 using ValidationException = FluentValidation.ValidationException;
 
@@ -14,7 +16,8 @@ public class CreateProductHandlerTests
     {
         var (context, repository) = TestHelper.CreateContextAndRepository<DefaultContext, ProductRepository>();
         var mapper = Helper.CreateMapper();
-        var handler = new CreateProductHandler(new CategoryRepository(context), repository, mapper);
+        var bus = Substitute.For<IBus>();
+        var handler = new CreateProductHandler(new CategoryRepository(context), repository, mapper, bus);
         return (context, handler);
     }
 

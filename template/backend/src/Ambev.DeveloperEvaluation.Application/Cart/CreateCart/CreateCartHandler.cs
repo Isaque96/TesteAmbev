@@ -1,7 +1,9 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Messaging;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Cart.CreateCart;
 
@@ -18,7 +20,6 @@ public class CreateCartHandler(ICartRepository cartRepository, IMapper mapper)
 
         var cart = mapper.Map<Domain.Entities.Cart>(command);
 
-        // garante Date + CreatedAt se não vier nada
         if (cart.Date == default)
             cart.Date = DateTime.UtcNow;
 

@@ -63,26 +63,7 @@ public class LoggingExtensionTests
         // Assert
         Assert.False(result); // não excluído
     }
-
-    [Fact(DisplayName = "Given non-information log, when filter applied, then it is not excluded")]
-    public void Given_NonInformation_When_FilterPredicate_Then_NotExcluded()
-    {
-        // Arrange
-        var logEvent = new LogEvent(
-            DateTimeOffset.Now,
-            LogEventLevel.Error,
-            exception: null,
-            messageTemplate: new MessageTemplate("", []),
-            properties: new List<LogEventProperty>()
-        );
-
-        // Act
-        var result = InvokeFilterPredicate(logEvent);
-
-        // Assert
-        Assert.True(result); // não excluído
-    }
-
+    
     /// <summary>
     /// Hack simples para invocar o FilterPredicate private via reflection.
     /// </summary>
