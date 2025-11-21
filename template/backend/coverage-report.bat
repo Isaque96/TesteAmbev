@@ -26,7 +26,8 @@ dotnet test tests/Ambev.DeveloperEvaluation.Unit/Ambev.DeveloperEvaluation.Unit.
     --no-restore --verbosity normal ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=cobertura ^
-    /p:CoverletOutput=../../TestResults/coverage.cobertura.xml
+    /p:CoverletOutput=../../TestResults/coverage.cobertura.xml ^
+    /p:ExcludeByFile="**\Migrations\*.cs"
 
 if errorlevel 1 (
     echo ERRO: Falha ao executar testes

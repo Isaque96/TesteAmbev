@@ -3,23 +3,26 @@ using Ambev.DeveloperEvaluation.Common.HealthChecks;
 using Ambev.DeveloperEvaluation.Common.Logging;
 using Ambev.DeveloperEvaluation.Common.Security;
 using Ambev.DeveloperEvaluation.Common.Validation;
+using Ambev.DeveloperEvaluation.Domain.Seed;
 using Ambev.DeveloperEvaluation.IoC;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Serilog;
+using LoggerExtensions = Microsoft.Extensions.Logging.LoggerExtensions;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
+        LoggingExtension.CreatePreLaunchLogger();
+        
         try
         {
-            Log.Information("Starting web application");
-
             var builder = WebApplication.CreateBuilder(args);
             builder.AddDefaultLogging();
 
@@ -27,7 +30,39 @@ public static class Program
             builder.Services.AddEndpointsApiExplorer();
 
             builder.AddBasicHealthChecks();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Ambev Developer Evaluation API",
+                    Version = "v1"
+                });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Insira o token JWT desta forma: Bearer {seu token}"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
 
             builder.Services.AddDbContext<DefaultContext>(options =>
                 options.UseNpgsql(
@@ -53,12 +88,25 @@ public static class Program
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             var app = builder.Build();
+            
+            Log.Information("Starting web application");
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+                await seeder.SeedAsync();
+            }
+            
             app.UseMiddleware<ValidationExceptionMiddleware>();
 
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ambev Developer Evaluation API v1");
+                    c.RoutePrefix = "swagger";
+                });
             }
 
             app.UseHttpsRedirection();
@@ -70,7 +118,7 @@ public static class Program
 
             app.MapControllers();
 
-            app.Run();
+            await app.RunAsync();
         }
         catch (Exception ex)
         {
@@ -78,7 +126,7 @@ public static class Program
         }
         finally
         {
-            Log.CloseAndFlush();
+            await Log.CloseAndFlushAsync();
         }
     }
 }

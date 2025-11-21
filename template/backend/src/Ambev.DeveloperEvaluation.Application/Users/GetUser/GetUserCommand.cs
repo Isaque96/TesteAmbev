@@ -11,16 +11,7 @@ public record GetUserCommand : IRequest<GetUserResult>
     /// The unique identifier of the user to retrieve
     /// </summary>
     public Guid Id { get; set; }
-
-    /// <summary>
-    /// Initializes a new instance of GetUserCommand
-    /// </summary>
-    /// <param name="id">The ID of the user to retrieve</param>
-    public GetUserCommand(Guid id)
-    {
-        Id = id;
-    }
-
+    
     /// <summary>
     /// Initializes a new instance of GetUserCommand
     /// </summary>

@@ -13,6 +13,6 @@ public class DeleteUserProfile : Profile
     public DeleteUserProfile()
     {
         CreateMap<Guid, Application.Users.DeleteUser.DeleteUserCommand>()
-            .ConstructUsing(id => new Application.Users.DeleteUser.DeleteUserCommand(id));
+            .ConstructUsing(id => new Application.Users.DeleteUser.DeleteUserCommand { Id = id });
     }
 }

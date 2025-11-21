@@ -23,11 +23,6 @@ public class BaseEntity : IComparable<BaseEntity>
     [Ignore]
     public DateTime? UpdatedAt { get; set; }
 
-    public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
-    {
-        return Validator.ValidateAsync(this);
-    }
-
     public int CompareTo(BaseEntity? other)
     {
         return other == null ? 1 : Id.CompareTo(other.Id);

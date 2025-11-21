@@ -16,22 +16,9 @@ public class PaginatedRequest
     [FromQuery(Name = "_size")]
     public int Size   { get; set; } = 10;
 
-    private string _order = "ASC";
     /// <summary>
     /// Order by (e.g., "date desc")
     /// </summary>
     [FromQuery(Name = "_order")]
-    public string Order
-    {
-        get => _order;
-        set
-        {
-            var normalized = value?.Trim().ToUpper();
-
-            // Se o projeto só quer aceitar ASC/DESC:
-            _order = normalized is "ASC" or "DESC"
-                ? normalized
-                : "ASC";
-        }
-    }
+    public string? Order { get; set; }
 }

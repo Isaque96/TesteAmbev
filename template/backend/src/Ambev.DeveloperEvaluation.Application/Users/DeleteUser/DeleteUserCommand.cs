@@ -15,14 +15,5 @@ public record DeleteUserCommand : IRequest<DeleteUserResponse>
     /// <summary>
     /// Initializes a new instance of DeleteUserCommand
     /// </summary>
-    /// <param name="id">The ID of the user to delete</param>
-    public DeleteUserCommand(Guid id)
-    {
-        Id = id;
-    }
-    
-    /// <summary>
-    /// Initializes a new instance of DeleteUserCommand
-    /// </summary>
     public DeleteUserCommand() { }
 }

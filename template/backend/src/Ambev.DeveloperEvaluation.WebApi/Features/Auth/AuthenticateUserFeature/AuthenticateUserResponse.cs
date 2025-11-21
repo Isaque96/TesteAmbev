@@ -11,6 +11,11 @@ public sealed class AuthenticateUserResponse
     public string Token { get; set; } = string.Empty;
 
     /// <summary>
+    /// Gets or sets the type of the token (e.g., Bearer)
+    /// </summary>
+    public string TokenType { get; set; } = string.Empty;
+
+    /// <summary>
     /// Gets or sets the user's email address
     /// </summary>
     public string Email { get; set; } = string.Empty;   

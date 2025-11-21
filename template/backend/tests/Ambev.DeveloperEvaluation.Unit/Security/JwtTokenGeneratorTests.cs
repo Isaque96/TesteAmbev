@@ -113,9 +113,9 @@ public class JwtTokenGeneratorTests
             var token = generator.GenerateToken(user);
 
             var handler = new JwtSecurityTokenHandler();
-            var wrongKey = Encoding.ASCII.GetBytes("another-secret-key-different");
+            var wrongKey = "another-secret-key-different"u8.ToArray();
 
-            Assert.Throws<SecurityTokenInvalidSignatureException>(() =>
+            Assert.Throws<SecurityTokenSignatureKeyNotFoundException>(() =>
             {
                 handler.ValidateToken(token, new TokenValidationParameters
                 {

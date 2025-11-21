@@ -27,6 +27,7 @@ public class AuthenticateUserHandler(
         return new AuthenticateUserResult
         {
             Token = token,
+            TokenType = "Bearer",
             Email = user.Email,
             Name = user.Username,
             Role = user.Role.ToString()

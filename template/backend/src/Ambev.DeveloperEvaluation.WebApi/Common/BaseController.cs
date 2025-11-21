@@ -14,8 +14,8 @@ public abstract class BaseController : ControllerBase
     protected IActionResult Ok<T>(T? data = default, string message = "Sucesso", bool success = true) =>
             base.Ok(new ApiResponseWithData<T> { Data = data, Success = success, Message = message });
 
-    protected IActionResult Created<T>(string routeName, object routeValues, T? data = default, string message = "Sucesso", bool success = true) =>
-        base.CreatedAtRoute(routeName, routeValues, new ApiResponseWithData<T> { Data = data, Message = message, Success = success });
+    protected IActionResult Created<T>(string actionName, object routeValues, T? data = default, string message = "Sucesso", bool success = true) =>
+        base.CreatedAtAction(actionName, routeValues, new ApiResponseWithData<T> { Data = data, Message = message, Success = success });
 
     protected IActionResult BadRequest(string message) =>
         base.BadRequest(new ApiResponse { Message = message, Success = false });

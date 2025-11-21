@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Core;
 using Serilog.Events;
 using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
@@ -11,8 +9,6 @@ using Serilog.Sinks.SystemConsole.Themes;
 using System.Diagnostics;
 
 namespace Ambev.DeveloperEvaluation.Common.Logging;
-
-
 
 /// <summary> Add default Logging configuration to project. This configuration supports Serilog logs with DataDog compatible output.</summary>
 public static class LoggingExtension
@@ -25,13 +21,21 @@ public static class LoggingExtension
         .WithDestructurers([new DbUpdateExceptionDestructurer()]);
 
     /// <summary>
+    /// Logger to be used before the application is fully launched.
+    /// </summary>
+    public static void CreatePreLaunchLogger()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
+    }
+
+    /// <summary>
     /// A filter predicate to exclude log events with specific criteria.
     /// </summary>
     private static readonly Func<LogEvent, bool> FilterPredicate = exclusionPredicate =>
     {
-
-        if (exclusionPredicate.Level != LogEventLevel.Information) return true;
-
         exclusionPredicate.Properties.TryGetValue("StatusCode", out var statusCode);
         exclusionPredicate.Properties.TryGetValue("Path", out var path);
 
@@ -51,7 +55,6 @@ public static class LoggingExtension
     /// </remarks> 
     public static WebApplicationBuilder AddDefaultLogging(this WebApplicationBuilder builder)
     {
-        Log.Logger = new LoggerConfiguration().CreateLogger();
         builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
         {
             loggerConfiguration
@@ -65,24 +68,26 @@ public static class LoggingExtension
 
             if (Debugger.IsAttached)
             {
-                loggerConfiguration.Enrich.WithProperty("DebuggerAttached", Debugger.IsAttached);
-                loggerConfiguration.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}", theme: SystemConsoleTheme.Colored);
+                loggerConfiguration
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console(
+                        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}",
+                        theme: SystemConsoleTheme.Colored);
             }
             else
             {
                 loggerConfiguration
-                    .WriteTo.Console
-                    (
-                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}"
-                    )
+                    .MinimumLevel.Information()
+                    .WriteTo.Console(
+                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}")
                     .WriteTo.File(
                         "logs/log-.txt",
                         rollingInterval: RollingInterval.Day,
-                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}"
-                    );
+                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {SourceContext} {Message:lj}{NewLine}{Exception}");
             }
         });
 
+        // Keep default logging + Serilog provider together
         builder.Services.AddLogging();
 
         return builder;
@@ -93,11 +98,14 @@ public static class LoggingExtension
     /// <returns>The <see cref="WebApplication"/> for Swagger documentation.</returns>
     public static WebApplication UseDefaultLogging(this WebApplication app)
     {
-        var logger = app.Services.GetRequiredService<ILogger<Logger>>();
-
         var mode = Debugger.IsAttached ? "Debug" : "Release";
-        logger.LogInformation("Logging enabled for '{Application}' on '{Environment}' - Mode: {Mode}", app.Environment.ApplicationName, app.Environment.EnvironmentName, mode);
-        return app;
+    
+        Log.Information(
+            "Logging enabled for '{Application}' on '{Environment}' - Mode: {Mode}",
+            app.Environment.ApplicationName,
+            app.Environment.EnvironmentName,
+            mode);
 
+        return app;
     }
 }

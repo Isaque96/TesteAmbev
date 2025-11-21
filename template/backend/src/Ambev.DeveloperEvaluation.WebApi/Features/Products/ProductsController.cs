@@ -6,7 +6,10 @@ using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
 using Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 using Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProductsByCategory;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.UpdateProduct;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +37,12 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
         CancellationToken cancellationToken
     )
     {
+        var validator = new CreateProduct.CreateProductRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+        
         var command = mapper.Map<CreateProductCommand>(request);
         var result = await mediator.Send(command, cancellationToken);
         var response = mapper.Map<CreateProduct.CreateProductResponse>(result);
@@ -59,7 +68,14 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
-        var query = new GetProductQuery { Id = id };
+        var request = new GetProductRequest { Id = id };
+        var validator = new GetProductRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var query = mapper.Map<GetProductQuery>(request);
         var result = await mediator.Send(query, cancellationToken);
         var response = mapper.Map<GetProduct.GetProductResponse>(result);
 
@@ -115,20 +131,29 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>Updated product details</returns>
     [HttpPut("{id:guid}")]
-    [ProducesResponseType(typeof(ApiResponseWithData<UpdateProduct.UpdateProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<UpdateProductResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateAsync(
         [FromRoute] Guid id,
-        [FromBody] UpdateProduct.UpdateProductRequest request,
+        [FromBody] UpdateProductRequest request,
         CancellationToken cancellationToken
     )
     {
+        if (id != request.Id)
+            return BadRequest("Id in URL and payload do not match.");
+
+        var validator = new UpdateProductRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+        
         var command = mapper.Map<UpdateProductCommand>(request);
         command.Id = id;
 
         var result = await mediator.Send(command, cancellationToken);
-        var response = mapper.Map<UpdateProduct.UpdateProductResponse>(result);
+        var response = mapper.Map<UpdateProductResponse>(result);
 
         return Ok(response, "Product updated successfully");
     }
@@ -147,7 +172,14 @@ public class ProductsController(IMediator mediator, IMapper mapper) : BaseContro
         CancellationToken cancellationToken
     )
     {
-        var command = new DeleteProductCommand { Id = id };
+        var request = new DeleteProductRequest { Id = id };
+        var validator = new DeleteProductRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+        
+        var command = mapper.Map<DeleteProductCommand>(request);
         await mediator.Send(command, cancellationToken);
 
         return Ok<object>("Product deleted successfully");
